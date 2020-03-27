@@ -1,0 +1,82 @@
+﻿@page
+@model BME77.Pages.SessionPage.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Session</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.ID_C)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.ID_C)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.Room)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.Room)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.Chair)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.Chair)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.TimeStart)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.TimeStart)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.TimeEnd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.TimeEnd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.IsWorkshop)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.IsWorkshop)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.IsOral)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.IsOral)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.IsKeyLab)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.IsKeyLab)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.IsBreak)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.IsBreak)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Session.ID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

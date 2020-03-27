@@ -1,0 +1,108 @@
+﻿@page
+@model BME77.Pages.PaperPage.IndexModel
+
+@{
+    ViewData["Title"] = "Papers";
+}
+
+<h2>Papers</h2>
+
+@*<p>
+        <a asp-page="Create">Create New</a>
+    </p>*@
+@*<form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find:<input type="text" name="search" value="@ViewData["currentFilter"]" />
+                <input type="submit" name="searchType" value="Search by title" class="btn btn-default" />|
+                <input type="submit" name="searchType" value="Search by abstract" class="btn btn-default" />|
+                <a asp-action="Index">Back to Full List</a>
+            </p>
+        </div>
+    </form>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a class="d-none d-sm-block"> Time</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paper[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paper[0].Session)
+            </th>
+
+            <th><div class="d-none d-sm-block"></div></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Paper)
+        {
+            <tr>
+                <td>
+                    @{
+                        string timeTypex = "";
+                        if ((item.TimeStart < DateTime.Now) && (item.TimeEnd > DateTime.Now))
+                        {
+                            timeTypex = "success";
+                        }
+                        else if (item.TimeStart > DateTime.Now)
+                        {
+                            timeTypex = "primary";
+                        }
+                        else
+                        {
+                            timeTypex = "secondary";
+                        }
+
+                    }
+                    <span class="d-none d-sm-block badge badge-@timeTypex">@item.TimeStart.ToString("dd MMMM,")<br>@item.TimeStart.ToString("HH:mm")&rsaquo;@item.TimeEnd.ToString("HH:mm")</span>
+                </td>
+                <td>
+                    <b>@Html.DisplayFor(modelItem => item.Title)</b> <br />
+                    @item.Author
+                    
+                </td>
+                <td>
+                    <span class="d-block d-sm-none badge badge-@timeTypex">@item.TimeStart.ToString("dd MMMM,")<br>@item.TimeStart.ToString("HH:mm")&rsaquo;@item.TimeEnd.ToString("HH:mm")</span>
+                    <a style="font-size:smaller" asp-page="/SessionPage/Index" asp-route-id="@item.Session.ID" asp-route-date="@item.TimeStart.Day">
+                        @Html.DisplayFor(modelItem => item.Session.Room) <br />
+                        @Html.DisplayFor(modelItem => item.Session.ID_C)-@Html.DisplayFor(modelItem => item.Session.Name)
+                    </a>
+                    <div class="d-block d-sm-none">
+                        @if (!String.IsNullOrEmpty(item.Abstract))
+                        {
+                            <a class="btn btn-outline-primary" asp-page="/PaperPage/Details" asp-route-id="@item.ID">Abstract</a><br />
+                        }
+
+                        @{
+                            if (!String.IsNullOrEmpty(item.FullTextLink))
+                            {
+                                <a class="btn btn-outline-primary" href=@item.FullTextLink>Full Text</a>
+                            }
+                        }
+                    </div>
+
+                </td>
+                <td>
+                    <div class="d-none d-sm-block">
+                        @if (!String.IsNullOrEmpty(item.Abstract))
+                        {
+                            <a asp-page="/PaperPage/Details" asp-route-id="@item.ID">Abstract</a><br />
+                        }
+
+                        @{
+                            if (!String.IsNullOrEmpty(item.FullTextLink))
+                            {
+                                <a href=@item.FullTextLink>Full Text</a>
+                            }
+                        }
+                    </div>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

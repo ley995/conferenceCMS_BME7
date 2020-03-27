@@ -1,0 +1,87 @@
+﻿@page
+@model BME77.Pages.SessionPage.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Session</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Session.ID_C" class="control-label"></label>
+                <input asp-for="Session.ID_C" class="form-control" />
+                <span asp-validation-for="Session.ID_C" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Session.Name" class="control-label"></label>
+                <input asp-for="Session.Name" class="form-control" />
+                <span asp-validation-for="Session.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Session.Room" class="control-label"></label>
+                <input asp-for="Session.Room" class="form-control" />
+                <span asp-validation-for="Session.Room" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Session.Chair" class="control-label"></label>
+                <input asp-for="Session.Chair" class="form-control" />
+                <span asp-validation-for="Session.Chair" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Session.TimeStart" class="control-label"></label>
+                <input asp-for="Session.TimeStart" class="form-control" />
+                <span asp-validation-for="Session.TimeStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Session.TimeEnd" class="control-label"></label>
+                <input asp-for="Session.TimeEnd" class="form-control" />
+                <span asp-validation-for="Session.TimeEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Session.IsWorkshop" /> @Html.DisplayNameFor(model => model.Session.IsWorkshop))
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Session.IsOral" /> @Html.DisplayNameFor(model => model.Session.IsOral))
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Session.IsKeyLab" /> @Html.DisplayNameFor(model => model.Session.IsKeyLab))
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Session.IsBreak" /> @Html.DisplayNameFor(model => model.Session.IsBreak))
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

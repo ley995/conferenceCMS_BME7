@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-BME77-CE19049C-C078-4005-94A9-687B245B621A</UserSecretsId>
+    <ApplicationIcon>bmelogo_FOc_icon.ico</ApplicationIcon>
+    <ApplicationInsightsResourceId>/subscriptions/b789be0c-85cf-45e1-a0e1-f978a3bf42ca/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/BME77</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/b789be0c-85cf-45e1-a0e1-f978a3bf42ca/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/BME77</ApplicationInsightsAnnotationResourceId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\images\Room\104.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\Room\1409.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\Room\1F.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\Room\401.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\Room\402.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\Room\409.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\Room\410.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\Room\411.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\Room\412.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\Room\413.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\Room\4F.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\Room\507.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\Room\5F.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="bootstrap" Version="4.1.1" />
+    <PackageReference Include="bootstrap.sass" Version="4.1.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Pages\Index.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Pages\Room.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="wwwroot\images\banner1.svg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\images\banner2.svg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\images\banner3.svg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,256 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+
+}
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="~/images/final banner.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/images/bar.png" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/vnuk.png" alt="Third slide">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<div>
+    <h3>Today Sessions<br /> @DateTime.Now.ToString("HH:mm")  @DateTime.Now.ToLongDateString()</h3>
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr class="clearfix">
+                    <th class="thead-light	d-none d-sm-block">
+                        ID
+                    </th>
+                    <th>
+                        Events
+                    </th>
+                    <th>
+                        Room&bull;Time
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Session)
+                {
+                    string selectedRow = "";
+                   
+
+                    if (item.ID == Model.SessionID)
+                    {
+                        selectedRow = "table-info";
+                    }
+                    if (item.IsBreak)
+                    {
+                        selectedRow = "bg-warning";
+                    }
+                    <tr class=" @selectedRow">
+                        <td class="d-none d-sm-block">
+                            @Html.DisplayFor(modelItem => item.ID_C)<br />
+                        </td>
+                        <td>
+                            <a id="@item.ID"></a>
+                            @if (item.IsBreak)
+                            {<div style="color:brown">
+                                    <b>
+                                        @Html.DisplayFor(modelItem => item.Name) <br />
+                                        <i>@Html.DisplayFor(modelItem => item.Chair)</i>
+                                    </b>
+                                </div>
+                            }
+                            else
+                            {
+                                <a asp-page="./Index" asp-route-id="@item.ID">
+                                    @Html.DisplayFor(modelItem => item.Name) <br />
+                                    <i>@Html.DisplayFor(modelItem => item.Chair)</i>
+                                </a>
+                            }
+                            @if (item.IsOral)
+                            {
+                                <span class="badge badge-warning" style="color:brown">Poster Presentation</span>
+
+                            }
+
+                        </td>
+                        <td>
+                            @{ string roomid = "104";
+                                if (!String.IsNullOrEmpty(item.Room))
+                                {
+                                    if (item.Room.Contains("A2")) { roomid = item.Room.Split('.')[1]; } else { roomid = "1409"; }
+                                }
+                                ViewData["RoomID"] = roomid;
+                            }
+                            <a asp-page="/Room" asp-route-id="@ViewData["RoomID"]">  @Html.DisplayFor(modelItem => item.Room) </a><br />
+                            @{
+                                string timeType = "";
+                                string status = "";
+                                if ((item.TimeStart < DateTime.Now) && (item.TimeEnd > DateTime.Now))
+                                {
+                                    timeType = "success"; status = "On-going";
+                                   
+
+                                }
+                                else if (item.TimeStart > DateTime.Now)
+                                {
+                                    timeType = "primary";
+                                }
+                                else
+                                {
+                                    timeType = "secondary";
+                                    status = "Completed";
+                                }
+                            }
+                            <span class="badge badge-@timeType">@item.TimeStart.ToString("dd MMMM,")<br>@item.TimeStart.ToString("HH:mm")&rsaquo;@item.TimeEnd.ToString("HH:mm")<br />@status</span>
+                        </td>
+                        <td>
+                            @if (!item.IsBreak)
+                            {
+                                <a class="d-none d-sm-block" asp-page="./Index" asp-route-id="@item.ID">Select</a>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+
+                        @if ((Model.Papers != null) && (item.ID == Model.SessionID))
+                        {
+                            <td colspan="5">
+                                @if (Model.Papers != null)
+                                {
+                                    //&& (item.ID == Model.SessionID))
+                                    <div style="font-size:smaller">
+                                        <h5>Papers</h5>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Time
+                                                    </th>
+                                                    <th>
+                                                        Title&bull;Authors
+                                                    </th>
+                                                    <th>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var itemx in Model.Papers)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @{
+                                                                string timeTypex = "";
+                                                                string statusx = "";
+                                                                if ((itemx.TimeStart < DateTime.Now) && (itemx.TimeEnd > DateTime.Now))
+                                                                {
+                                                                    timeTypex = "success"; statusx = "On-going";
+
+                                                                }
+                                                                else if (itemx.TimeStart > DateTime.Now)
+                                                                {
+                                                                    timeTypex = "primary";
+                                                                }
+                                                                else
+                                                                {
+                                                                    timeTypex = "secondary";
+                                                                    statusx = "Completed";
+                                                                }
+
+                                                            }
+                                                            <span class="badge badge-@timeTypex">@itemx.TimeStart.ToString("HH:mm")&rsaquo;@itemx.TimeEnd.ToString("HH:mm")<br>@statusx</span>
+                                                        </td>
+                                                        <td>
+                                                            <b> @Html.DisplayFor(modelItem => itemx.Title)</b> <br />
+                                                            @Html.DisplayFor(modelItem => itemx.Author)
+                                                        </td>
+                                                        <td>
+                                                            @if (!String.IsNullOrEmpty(itemx.Abstract))
+                                                            {
+                                                                <a asp-page="/PaperPage/Details" asp-route-id="@itemx.ID">Abstract</a><br />
+                                                            }
+
+                                                            @{
+                                                                if (!String.IsNullOrEmpty(itemx.FullTextLink))
+                                                                {
+                                                                    <a href=@itemx.FullTextLink>Full Text</a>
+                                                                }
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                            </td>
+                        }                   
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@if (Model.SessionID != 0)
+{
+    <script type="text/javascript">document.getElementById('@Model.SessionID').scrollIntoView(true);</script>
+}
+
+<div style="display:none" class="row">
+    <div class="col-md-4">
+        <h3>Activities</h3>
+        <ul>
+            <li> <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Building Map</a></li>
+            <li> <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Timeline</a></li>
+            <li> <a href="https://go.microsoft.com/fwlink/?LinkID=398939">City Tour</a></li>
+            <li> <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Transportation</a></li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <h3>Conference</h3>
+        <ul>
+            <li><a href="https://go.microsoft.com/fwlink/?linkid=852130">Keynote Speaker</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Proceedings</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Topics</a></li>
+            @*<li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
+                <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>*@
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <h3>VN-UK Workshop</h3>
+        <ul>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Timeline</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Speakers</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Participants</a></li>
+            @*<li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
+                <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
+                <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
+                <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
+                <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>*@
+        </ul>
+    </div>
+    @*<div class="col-md-3">
+            <h2>Run &amp; Deploy</h2>
+            <ul>
+                <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
+                <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
+                <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure App Service</a></li>
+            </ul>
+        </div>*@
+</div>

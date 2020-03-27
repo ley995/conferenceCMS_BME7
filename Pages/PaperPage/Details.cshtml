@@ -1,0 +1,80 @@
+﻿@page
+@model BME77.Pages.PaperPage.DetailsModel
+
+@{
+    ViewData["Title"] = Model.Paper.Title;
+}
+
+
+<div>
+    <h4>Paper</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Paper.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Paper.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Paper.Author)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Paper.Author)
+        </dd>
+
+        <dt>
+            Time
+        </dt>
+        <dd>
+            @{
+                var item = Model.Paper;
+                string timeTypex = "";
+                if ((item.TimeStart < DateTime.Now) && (item.TimeEnd > DateTime.Now))
+                {
+                    timeTypex = "success";
+                }
+                else if (item.TimeStart > DateTime.Now)
+                {
+                    timeTypex = "primary";
+                }
+                else
+                {
+                    timeTypex = "secondary";
+                }
+
+            }
+            <span class="badge badge-@timeTypex">@item.TimeStart.ToString("dd MMMM, HH:mm")&rsaquo;@item.TimeEnd.ToString("HH:mm")</span>
+        </dd>
+
+        <dt>
+            Session
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Paper.Session.Name)
+        </dd>
+        @if (!String.IsNullOrEmpty(Model.Paper.Abstract))
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Paper.Abstract)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Paper.Abstract)
+            </dd>
+
+        }
+        @if (!String.IsNullOrEmpty(Model.Paper.FullTextLink))
+        {
+            <dd>
+                <a href="@Model.Paper.FullTextLink">Full Text</a>
+            </dd>
+        }
+
+        
+
+    </dl>
+</div>
+<div>
+    @*<a asp-page="./Edit" asp-route-id="@Model.Paper.ID">Edit</a> |*@
+    <a asp-page="./Index">Back to List</a>
+</div>

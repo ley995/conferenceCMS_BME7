@@ -1,0 +1,21 @@
+﻿@page "{id:int?}"
+@model RoomModel
+@{ ViewData["Title"] = "Room";
+    ViewData["Room"] = Model.Room;}
+<h3>
+    <a asp-page="Room" asp-route-id="104">A2.104</a>|
+    <a asp-page="Room" asp-route-id="400">A2.205</a>|
+    <a asp-page="Room" asp-route-id="401">A2.401</a>|
+    <a asp-page="Room" asp-route-id="402">A2.402</a>|
+    <a asp-page="Room" asp-route-id="409">A2.409</a>|
+    <a asp-page="Room" asp-route-id="410">A2.410</a>|
+    <a asp-page="Room" asp-route-id="411">A2.411</a>|
+    <a asp-page="Room" asp-route-id="412">A2.412</a>|
+    <a asp-page="Room" asp-route-id="413">A2.413</a>|
+    <a asp-page="Room" asp-route-id="1409">A1.409</a>|
+    <a asp-page="Room" asp-route-id="507">A2.507</a>
+</h3>
+
+@{
+    <img src="~/images/Room/@ViewData["Room"]" alt="Room" class="img-fluid" />
+}

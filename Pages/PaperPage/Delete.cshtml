@@ -1,0 +1,64 @@
+﻿@page
+@model BME77.Pages.PaperPage.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Paper</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Paper.Abstract)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Paper.Abstract)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Paper.TimeStart)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Paper.TimeStart)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Paper.TimeEnd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Paper.TimeEnd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Paper.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Paper.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Paper.Session)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Paper.Session.ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Paper.FullTextLink)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Paper.FullTextLink)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Paper.Author)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Paper.Author)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Paper.ID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

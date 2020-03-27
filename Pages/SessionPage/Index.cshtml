@@ -1,0 +1,171 @@
+﻿@page "{id:int?}"
+@model BME77.Pages.SessionPage.IndexModel
+
+@{
+    ViewData["Title"] = "Session";
+}
+
+<h2>Sessions</h2>
+<div class="btn-group" role="group">
+    <a asp-page="./Index" asp-route-date="27" style="color:#ffd800;background:#800000" class="btn btn-secondary">June 27</a>
+    <a asp-page="./Index" asp-route-date="28" style="color:#ffd800;background:#800000" class="btn btn-secondary">June 28</a>
+    <a asp-page="./Index" asp-route-date="29" style="color:#ffd800;background:#800000" class="btn btn-secondary">June 29</a>
+    <a asp-page="./Index" style="color:#ffd800;background:#800000" class="btn btn-secondary">All</a>
+</div>
+
+@*<p>
+        <a asp-page="Create">Create New</a>
+    </p>*@
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr class="clearfix">
+                <th class="thead-light	d-none d-sm-block">
+                    ID
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Session[0].Name)
+                </th>
+                <th>
+                    Room&bull;Time
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Session)
+            {
+                string selectedRow = "";
+
+                if (item.ID == Model.SessionID)
+                {
+                    selectedRow = "";
+                }
+                if (item.IsBreak)
+                {
+                    selectedRow = "table-warning";
+                }
+                <tr class=" @selectedRow">
+                    <td class="d-none d-sm-block">
+                        @Html.DisplayFor(modelItem => item.ID_C)<br />
+                    </td>
+                    <td>
+                        <a id="@item.ID"></a>
+                        <a asp-page="./Index" asp-route-id="@item.ID">
+                            @Html.DisplayFor(modelItem => item.Name) <br />
+                            <i>@Html.DisplayFor(modelItem => item.Chair)</i>
+                        </a>
+                    </td>
+                    <td>
+                        @{ string roomid = "104";
+                            if (!String.IsNullOrEmpty(item.Room))
+                            {
+                                if (item.Room.Contains("A2")) { roomid = item.Room.Split('.')[1]; } else { roomid = "1409"; }
+                            }
+                            ViewData["RoomID"] = roomid;
+                        }
+                        <a asp-page="/Room" asp-route-id="@ViewData["RoomID"]">  @Html.DisplayFor(modelItem => item.Room) </a><br />
+                        @{
+                            string timeType = "";
+                            if ((item.TimeStart < DateTime.Now) && (item.TimeEnd > DateTime.Now))
+                            {
+                                timeType = "success";
+                            }
+                            else if (item.TimeStart > DateTime.Now)
+                            {
+                                timeType = "primary";
+                            }
+                            else
+                            {
+                                timeType = "secondary";
+                            }
+                        }
+                        <span class="badge badge-@timeType">@item.TimeStart.ToString("dd MMMM,")<br>@item.TimeStart.ToString("HH:mm")&rsaquo;@item.TimeEnd.ToString("HH:mm")</span>
+                    </td>
+                    <td>
+                        @if (!item.IsBreak)
+                        {
+                            <a class="d-none d-sm-block" asp-page="./Index" asp-route-id="@item.ID">Select</a>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    @if ((Model.Papers != null) && (item.ID == Model.SessionID))
+                    {
+                        <td colspan="5">
+                            @if (Model.Papers != null)
+                            {
+                                //&& (item.ID == Model.SessionID))
+                                <div style="font-size:smaller">
+                                    <h5>Papers</h5>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Time
+                                                </th>
+                                                <th>
+                                                    Title&bull;Authors
+                                                </th>
+                                                <th>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var itemx in Model.Papers)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @{
+                                                            string timeTypex = "";
+                                                            if ((itemx.TimeStart < DateTime.Now) && (itemx.TimeEnd > DateTime.Now))
+                                                            {
+                                                                timeTypex = "success";
+                                                            }
+                                                            else if (itemx.TimeStart > DateTime.Now)
+                                                            {
+                                                                timeTypex = "primary";
+                                                            }
+                                                            else
+                                                            {
+                                                                timeTypex = "secondary";
+                                                            }
+
+                                                        }
+                                                        <span class="badge badge-@timeTypex">@itemx.TimeStart.ToString("HH:mm")&rsaquo;@itemx.TimeEnd.ToString("HH:mm")</span>
+                                                    </td>
+                                                    <td>
+                                                        <b> @Html.DisplayFor(modelItem => itemx.Title)</b> <br />
+                                                        @Html.DisplayFor(modelItem => itemx.Author)
+                                                    </td>
+                                                    <td>
+                                                        @if (!String.IsNullOrEmpty(itemx.Abstract))
+                                                        {
+                                                            <a asp-page="/PaperPage/Details" asp-route-id="@itemx.ID">Abstract</a><br />
+                                                        }
+
+                                                        @{
+                                                            if (!String.IsNullOrEmpty(itemx.FullTextLink))
+                                                            {
+                                                                <a href=@itemx.FullTextLink>Full Text</a>
+                                                            }
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@if (Model != null)
+{
+    <script type="text/javascript">document.getElementById('@Model.SessionID').scrollIntoView(true);</script>
+}

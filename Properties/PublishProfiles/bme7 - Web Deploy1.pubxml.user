@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAALhhE9tRd2UKDZThg98dXmQAAAAACAAAAAAAQZgAAAAEAACAAAAA/HMykSHSKQ63uRBbAE6fhLtC4Hu6z2H+py87uLXZCQwAAAAAOgAAAAAIAACAAAAAvLhXYprPJdeQwm4JTVwhpoezFmk8iqhkWYQ0pC6q1k4AAAABBD49w3O1NavCoN4baznr5uTEcT0BU8mSgoZUfwX2BcTq5yO5zLmEKx9yScv7z9zHFPiixU3CuRHoWzGgvUJEw3bgq/jC0ZDIQzVLGvCEL9PBKE3TNOWMn8+fcDRjzph4ZzESSqHWNeRkp4UUXgJB0Y2Vu5F4JYm5IefpTcqBBzkAAAACXkrPPB/tvOaIx0YFcEn8R9RLa8PkBkwX10+CQHTGawKnMfPRmqRdaTCSzY5wsvHZS7jsXBqalSmkPuVlPGoyN</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="IUROFConnection">
+      <Value>Server=tcp:iurof2.database.windows.net,1433;Initial Catalog=iurof;Persist Security Info=False;User ID=iurof;Password=Nguyenley1995;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

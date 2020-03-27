@@ -1,0 +1,65 @@
+﻿@page
+@model BME77.Pages.PaperPage.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Paper</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Paper.ID" />
+            <div class="form-group">
+                <label asp-for="Paper.Abstract" class="control-label"></label>
+                <input asp-for="Paper.Abstract" class="form-control" />
+                <span asp-validation-for="Paper.Abstract" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paper.SessionID" class="control-label"></label>
+                <select asp-for="Paper.SessionID" class="form-control" asp-items="ViewBag.SessionID"></select>
+                <span asp-validation-for="Paper.SessionID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paper.TimeStart" class="control-label"></label>
+                <input asp-for="Paper.TimeStart" class="form-control" />
+                <span asp-validation-for="Paper.TimeStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paper.TimeEnd" class="control-label"></label>
+                <input asp-for="Paper.TimeEnd" class="form-control" />
+                <span asp-validation-for="Paper.TimeEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paper.Title" class="control-label"></label>
+                <input asp-for="Paper.Title" class="form-control" />
+                <span asp-validation-for="Paper.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paper.FullTextLink" class="control-label"></label>
+                <input asp-for="Paper.FullTextLink" class="form-control" />
+                <span asp-validation-for="Paper.FullTextLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paper.Author" class="control-label"></label>
+                <input asp-for="Paper.Author" class="form-control" />
+                <span asp-validation-for="Paper.Author" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

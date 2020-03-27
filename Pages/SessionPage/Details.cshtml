@@ -1,0 +1,56 @@
+﻿@page
+@model BME77.Pages.SessionPage.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Session</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.ID_C)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.ID_C)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.Room)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.Room)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.Chair)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.Chair)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.TimeStart)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.TimeStart)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.TimeEnd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Session.TimeEnd)
+        </dd>
+   
+    </dl>
+</div>
+<div>
+    @*<a asp-page="./Edit" asp-route-id="@Model.Session.ID">Edit</a> |*@
+    <a asp-page="./Index">Back to List</a>
+</div>
